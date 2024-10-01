@@ -1,3 +1,5 @@
 {
   "cSpell.ignoreRegExpList": ["/[^\\x00-\\x7F]+/"],
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
