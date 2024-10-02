@@ -1,0 +1,13 @@
+---
+import DefaultLayout from '../layouts/DefaultLayout.astro'
+
+interface Props {
+  error: unknown
+}
+
+const { error } = Astro.props
+---
+
+<DefaultLayout>
+  <p class="text-red-600">{error instanceof Error ? error.message : 'Unexpected error'}</p>
+</DefaultLayout>

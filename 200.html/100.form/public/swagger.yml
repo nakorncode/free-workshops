@@ -1,0 +1,186 @@
+openapi: 3.0.0
+info:
+  title: Online Bookstore API
+  description: API for managing books and user interactions in an online bookstore.
+  version: 1.0.0
+
+paths:
+  /books:
+    get:
+      summary: Get all books
+      description: Retrieve a list of all books.
+      responses:
+        '200':
+          description: List of books
+          content:
+            text/html:
+              schema:
+                type: string
+                example: <html> <!-- data --> </html>
+
+  /books/search:
+    get:
+      summary: Search for books
+      description: Search for books with various filters and sorting options.
+      parameters:
+        - name: title
+          in: query
+          description: The title of the book.
+          schema:
+            type: string
+        - name: author
+          in: query
+          description: The author of the book.
+          schema:
+            type: string
+        - name: costMin
+          in: query
+          description: Minimum cost of the book.
+          schema:
+            type: number
+        - name: costMax
+          in: query
+          description: Maximum cost of the book.
+          schema:
+            type: number
+        - name: sortBy
+          in: query
+          description: 'Sort by one of the following: title, totalStar, sold, releaseDate.'
+          schema:
+            type: string
+            enum: [title, totalStar, sold, releaseDate]
+        - name: order
+          in: query
+          description: Sorting order, either ascending or descending.
+          schema:
+            type: string
+            enum: [asc, desc]
+      responses:
+        '200':
+          description: List of books based on search filters
+          content:
+            text/html:
+              schema:
+                type: string
+                example: <html> <!-- data --> </html>
+
+  /sign-up:
+    post:
+      summary: Sign up a new user
+      description: Create a new user account.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                  description: User's first name.
+                lastName:
+                  type: string
+                  description: User's last name.
+                email:
+                  type: string
+                  description: User's email address.
+                password:
+                  type: string
+                  description: User's password.
+                gender:
+                  type: string
+                  description: User's gender. Defaults to 'none'.
+                  default: none
+                dateOfBirth:
+                  type: string
+                  format: date
+                  description: User's date of birth.
+                country:
+                  type: string
+                  description: User's country.
+              required:
+                - firstName
+                - lastName
+                - email
+                - password
+      responses:
+        '201':
+          description: User account created successfully
+        '400':
+          description: Invalid input data
+
+  /books/review:
+    post:
+      summary: Add a review for a book
+      description: Submit a review for a book including rating and optional image.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of the reviewer.
+                text:
+                  type: string
+                  description: Review text content.
+                image:
+                  type: string
+                  format: binary
+                  description: Image to upload (optional).
+                star:
+                  type: integer
+                  description: Star rating from 1 to 5.
+                  minimum: 1
+                  maximum: 5
+              required:
+                - name
+                - text
+                - star
+      responses:
+        '201':
+          description: Review added successfully
+        '400':
+          description: Invalid input data
+
+components:
+  schemas:
+    Book:
+      type: object
+      properties:
+        title:
+          type: string
+        author:
+          type: string
+        description:
+          type: string
+        cost:
+          type: number
+        availability:
+          type: boolean
+        totalSold:
+          type: integer
+        reviews:
+          type: array
+          items:
+            $ref: '#/components/schemas/Review'
+        releaseDate:
+          type: string
+          format: date
+        tags:
+          type: array
+          items:
+            type: string
+    Review:
+      type: object
+      properties:
+        userName:
+          type: string
+        star:
+          type: integer
+          minimum: 1
+          maximum: 5
+        text:
+          type: string

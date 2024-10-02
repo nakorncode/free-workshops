@@ -1,0 +1,41 @@
+---
+import { books } from "../../data/books"
+import DefaultLayout from "../../layouts/DefaultLayout.astro"
+
+const { id } = Astro.params
+
+if (!id) {
+  throw new Error('ไม่พบรหัสหนังสือ')
+}
+
+const book = books.find(book => book.id === +id)
+
+if (!book) {
+  throw new Error('ไม่พบหนังสือ')
+}
+---
+
+<DefaultLayout>
+  <h1 class="text-xl font-bold mb-3">({book.id}) {book.title}</h1>
+
+  <div class="prose max-w-none text-black">
+    <ul>
+      <li><b>รหัสหนังสือ:</b> {book.id}</li>
+      <li><b>ผู้เขียน:</b> {book.author}</li>
+      <li><b>ยอดขาย:</b> {book.sold}</li>
+      <li><b>วันวางจำหน่าย:</b></li>
+      <li><b>คะแนนรีวิวเฉลี่ย:</b> {(book.reviews.reduce((prev, cur) => {
+        return prev + cur.star
+      }, 0) / book.reviews.length).toFixed(1)}</li>
+      <li><b>จำนวนรีวิว:</b> {book.reviews.length}</li>
+      <li>
+        <b>รายละเอียดรีวิว:</b>
+        <ul>
+          {book.reviews.map(review =>
+            <li><b>{review.name}:</b> ({review.star} ดาว) {review.text}</li>
+          )}
+        </ul>
+      </li>
+    </ul>
+  </div>
+</DefaultLayout>
