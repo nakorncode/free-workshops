@@ -1,0 +1,49 @@
+---
+import dayjs from 'dayjs'
+import type { Book } from '../data/books'
+
+interface Props {
+  books: Book[]
+}
+
+const { books } = Astro.props
+---
+
+<div class="prose max-w-none">
+  <table class="w-full text-lg">
+    <thead>
+      <tr>
+        <th>รหัส</th>
+        <th>ชื่อ</th>
+        <th>ผู้เขียน</th>
+        <th>วางจำหน่าย</th>
+        <th>คะแนนรีวิว</th>
+        <th>จำนวนรีวิว</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        books.map((book) => (
+          <tr>
+            <td>{book.id}</td>
+            <td>
+              <a class="text-blue-600 underline" href={`/books/${book.id}`}>
+                {book.title}
+              </a>
+            </td>
+            <td>{book.author}</td>
+            <td>{dayjs(book.releasedDate).format('YYYY-MM-DD')}</td>
+            <td>
+              {(
+                book.reviews.reduce((prev, cur) => {
+                  return prev + cur.star
+                }, 0) / book.reviews.length
+              ).toFixed(1)}
+            </td>
+            <td>{book.reviews.length}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>

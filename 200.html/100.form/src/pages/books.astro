@@ -1,36 +1,87 @@
 ---
-import { books } from "../data/books";
-import DefaultLayout from "../layouts/DefaultLayout.astro";
-import dayjs from 'dayjs';
+import { z } from 'astro/zod'
+import BookTable from '../components/BookTable.astro'
+import { books } from '../data/books'
+import DefaultLayout from '../layouts/DefaultLayout.astro'
+import { clone, orderBy, sumBy } from 'lodash-es'
+
+const querySchema = z
+  .object({
+    title: z.string().optional(),
+    author: z.string().optional(),
+    costMin: z.string().optional(),
+    costMax: z.string().optional(),
+    sortBy: z
+      .enum(['title', 'author', 'totalStar', 'totalReview', 'releasedDate'])
+      .optional(),
+    order: z.enum(['asc', 'desc']).optional(),
+  })
+  .superRefine((data, ctx) => {
+    if ((data.costMin && !data.costMax) || (!data.costMin && data.costMax)) {
+      ctx.addIssue({
+        path: data.costMin ? ['costMin'] : ['costMax'],
+        message: 'ต้องมีทั้งข้อมูล costMin และ costMax',
+        code: z.ZodIssueCode.custom,
+      })
+    }
+    if ((data.order && !data.sortBy) || (!data.order && data.sortBy)) {
+      ctx.addIssue({
+        path: data.order ? ['order'] : ['sortBy'],
+        message: 'ต้องมีทั้งข้อมูล order และ sortBy',
+        code: z.ZodIssueCode.custom,
+      })
+    }
+  })
+
+const url = new URL(Astro.request.url)
+const query = querySchema.parse(Object.fromEntries(url.searchParams.entries()))
+
+let resultBooks = clone(books)
+
+if (query.title) {
+  resultBooks = resultBooks.filter((book) => {
+    return book.title.toLowerCase().includes(query.title!.toLowerCase())
+  })
+}
+if (query.author) {
+  resultBooks = resultBooks.filter((book) => {
+    return book.author.toLowerCase().includes(query.author!.toLowerCase())
+  })
+}
+if (query.costMin && query.costMax) {
+  const costMin = parseFloat(query.costMin)
+  const costMax = parseFloat(query.costMax)
+  resultBooks = resultBooks.filter((book) => {
+    return book.cost >= costMin && book.cost <= costMax
+  })
+}
+if (query.sortBy && query.order) {
+  const { sortBy: querySortBy, order: queryOrder } = query
+  if (
+    querySortBy === 'title' ||
+    querySortBy === 'author' ||
+    querySortBy === 'releasedDate'
+  ) {
+    resultBooks = orderBy(resultBooks, (book) => book[querySortBy], queryOrder)
+  } else if (querySortBy === 'totalReview') {
+    resultBooks = orderBy(
+      resultBooks,
+      (book) => book.reviews.length,
+      queryOrder
+    )
+  } else if (querySortBy === 'totalStar') {
+    resultBooks = orderBy(
+      resultBooks,
+      (book) => {
+        const totalStar = sumBy(book.reviews, 'star')
+        return book.reviews.length > 0 ? totalStar / book.reviews.length : 0
+      },
+      queryOrder
+    )
+  }
+}
 ---
 
 <DefaultLayout>
-  <div class="prose max-w-none">
-    <table class="w-full text-lg">
-      <thead>
-        <tr>
-          <th>รหัส</th>
-          <th>ชื่อ</th>
-          <th>ผู้เขียน</th>
-          <th>วางจำหน่าย</th>
-          <th>คะแนนรีวิว</th>
-          <th>จำนวนรีวิว</th>
-        </tr>
-      </thead>
-      <tbody>
-        {books.map(book =>
-          <tr>
-            <td>{book.id}</td>
-            <td><a class="text-blue-600 underline" href={`/books/${book.id}`}>{book.title}</a></td>
-            <td>{book.author}</td>
-            <td>{dayjs(book.releasedDate).format('YYYY-MM-DD')}</td>
-            <td>{(book.reviews.reduce((prev, cur) => {
-              return prev + cur.star
-            }, 0) / book.reviews.length).toFixed(1)}</td>
-            <td>{book.reviews.length}</td>
-          </tr>
-        )}
-      </tbody>
-    </table>
-  </div>
+  <BookTable books={resultBooks} />
 </DefaultLayout>

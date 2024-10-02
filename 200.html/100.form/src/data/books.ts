@@ -3,7 +3,6 @@ export interface Book {
   title: string
   author: string
   cost: number
-  sold: number
   reviews: {
     name: string
     text: string
@@ -18,7 +17,6 @@ export const books: Book[] = [
     title: 'The Art of Programming',
     author: 'Alice Johnson',
     cost: 590,
-    sold: 414,
     releasedDate: new Date('2023-02-05'),
     reviews: [
       {
@@ -64,7 +62,6 @@ export const books: Book[] = [
     title: 'Mastering TypeScript',
     author: 'David Brown',
     cost: 550,
-    sold: 338,
     releasedDate: new Date('2018-01-06'),
     reviews: [
       {
@@ -89,16 +86,6 @@ export const books: Book[] = [
         star: 4,
       },
       {
-        name: 'Jacob Martinez',
-        text: 'Helped me a lot with my projects.',
-        star: 5,
-      },
-      {
-        name: 'Isabella Clark',
-        text: 'Good content but a bit repetitive.',
-        star: 3,
-      },
-      {
         name: 'Mason Lewis',
         text: 'Perfect for transitioning from JavaScript.',
         star: 5,
@@ -121,7 +108,6 @@ export const books: Book[] = [
     title: 'Learning React',
     author: 'Bob Smith',
     cost: 590,
-    sold: 550,
     releasedDate: new Date('2015-07-15'),
     reviews: [
       {
@@ -167,7 +153,6 @@ export const books: Book[] = [
     title: 'Advanced Python',
     author: 'Emma Davis',
     cost: 490,
-    sold: 468,
     releasedDate: new Date('2023-09-22'),
     reviews: [
       {
@@ -184,7 +169,7 @@ export const books: Book[] = [
       {
         name: 'Liam Walker',
         text: 'Some sections could be simplified.',
-        star: 3,
+        star: 5,
       },
       {
         name: 'Lily Allen',
@@ -206,7 +191,7 @@ export const books: Book[] = [
       {
         name: 'Avery Edwards',
         text: 'A little advanced for beginners.',
-        star: 3,
+        star: 5,
       },
       { name: 'Liam Baker', text: 'Highly detailed, very helpful.', star: 5 },
     ],
@@ -216,7 +201,6 @@ export const books: Book[] = [
     title: 'JavaScript Essentials',
     author: 'John Wilson',
     cost: 600,
-    sold: 641,
     releasedDate: new Date('2017-10-13'),
     reviews: [
       {
@@ -232,7 +216,7 @@ export const books: Book[] = [
       {
         name: 'Sophia Collins',
         text: 'Solid introduction to JavaScript.',
-        star: 4,
+        star: 5,
       },
       {
         name: 'Henry Johnson',
@@ -243,7 +227,7 @@ export const books: Book[] = [
       {
         name: 'Mason Lewis',
         text: 'Some concepts were too simplified.',
-        star: 3,
+        star: 5,
       },
       {
         name: 'Olivia Thompson',
@@ -262,7 +246,6 @@ export const books: Book[] = [
     title: 'C++ for Beginners',
     author: 'Sophia Martinez',
     cost: 690,
-    sold: 186,
     releasedDate: new Date('2014-06-30'),
     reviews: [
       { name: 'Ella Lee', text: 'A great starting point for C++.', star: 5 },
@@ -300,7 +283,6 @@ export const books: Book[] = [
     title: 'Data Structures in Java',
     author: 'Liam Garcia',
     cost: 450,
-    sold: 230,
     releasedDate: new Date('2019-02-24'),
     reviews: [
       {
@@ -311,7 +293,7 @@ export const books: Book[] = [
       {
         name: 'Ava Thompson',
         text: 'Great for preparing for interviews!',
-        star: 4,
+        star: 2,
       },
       {
         name: 'Daniel Martinez',
@@ -321,7 +303,7 @@ export const books: Book[] = [
       {
         name: 'Mia White',
         text: 'Very helpful for understanding Java data structures.',
-        star: 5,
+        star: 3,
       },
       {
         name: 'Noah Garcia',
@@ -346,7 +328,6 @@ export const books: Book[] = [
     title: 'Web Development with HTML & CSS',
     author: 'Olivia Anderson',
     cost: 390,
-    sold: 308,
     releasedDate: new Date('2021-04-19'),
     reviews: [
       {
@@ -384,7 +365,6 @@ export const books: Book[] = [
     title: 'SQL for Data Analysis',
     author: 'James Brown',
     cost: 470,
-    sold: 501,
     releasedDate: new Date('2019-07-29'),
     reviews: [
       { name: 'Lily White', text: 'Invaluable for data analysts.', star: 5 },
@@ -418,7 +398,6 @@ export const books: Book[] = [
     title: 'Machine Learning Made Simple',
     author: 'Chloe Roberts',
     cost: 690,
-    sold: 413,
     releasedDate: new Date('2020-11-11'),
     reviews: [
       {
@@ -456,7 +435,6 @@ export const books: Book[] = [
     title: 'Algorithms Unlocked',
     author: 'Emily Walker',
     cost: 450,
-    sold: 529,
     releasedDate: new Date('2018-06-02'),
     reviews: [
       {
@@ -468,17 +446,6 @@ export const books: Book[] = [
         name: 'Chloe Gonzalez',
         text: 'Well structured and easy to understand.',
         star: 4,
-      },
-      { name: 'Liam Thompson', text: 'A little too academic for me.', star: 3 },
-      {
-        name: 'Grace Adams',
-        text: 'Good for building foundational knowledge.',
-        star: 4,
-      },
-      {
-        name: 'Avery Martinez',
-        text: 'Highly recommend for CS students.',
-        star: 5,
       },
       {
         name: 'Lucas Scott',
@@ -502,7 +469,6 @@ export const books: Book[] = [
     title: 'Introduction to Cybersecurity',
     author: 'Liam Brown',
     cost: 290,
-    sold: 257,
     releasedDate: new Date('2022-03-14'),
     reviews: [
       {
@@ -536,23 +502,12 @@ export const books: Book[] = [
     title: 'Kubernetes Up & Running',
     author: 'James Johnson',
     cost: 480,
-    sold: 302,
     releasedDate: new Date('2020-05-05'),
     reviews: [
       {
         name: 'Olivia Lee',
         text: 'Comprehensive guide to Kubernetes.',
         star: 5,
-      },
-      {
-        name: 'Sophia Robinson',
-        text: 'Very informative, but a bit overwhelming.',
-        star: 4,
-      },
-      {
-        name: 'Ethan Davis',
-        text: 'Good book, but better suited for experienced devs.',
-        star: 3,
       },
       { name: 'Charlotte Wilson', text: 'Helpful and detailed.', star: 4 },
       {
@@ -582,7 +537,6 @@ export const books: Book[] = [
     title: 'JavaScript: The Good Parts',
     author: 'David Gonzalez',
     cost: 300,
-    sold: 823,
     releasedDate: new Date('2008-05-15'),
     reviews: [
       {
@@ -620,10 +574,8 @@ export const books: Book[] = [
     title: 'Rust Programming by Example',
     author: 'Emma Moore',
     cost: 680,
-    sold: 421,
     releasedDate: new Date('2021-12-10'),
     reviews: [
-      { name: 'Sophia Lee', text: 'Great practical guide to Rust.', star: 5 },
       {
         name: 'Mason Brown',
         text: 'Very helpful examples throughout.',
@@ -662,29 +614,11 @@ export const books: Book[] = [
     title: 'Introduction to AI',
     author: 'William Harris',
     cost: 250,
-    sold: 287,
     releasedDate: new Date('2022-08-03'),
     reviews: [
       {
         name: 'Liam Robinson',
         text: 'Very comprehensive introduction.',
-        star: 5,
-      },
-      { name: 'Olivia White', text: 'Well explained concepts of AI.', star: 4 },
-      {
-        name: 'Emily Lewis',
-        text: 'Good examples, but lacks practical exercises.',
-        star: 3,
-      },
-      {
-        name: 'Henry Martinez',
-        text: 'Loved the coverage of AI fundamentals.',
-        star: 5,
-      },
-      { name: 'Mia Garcia', text: 'Perfect for those new to AI.', star: 4 },
-      {
-        name: 'David Green',
-        text: 'Engaging content, well-structured.',
         star: 5,
       },
       { name: 'Charlotte Hall', text: 'Some topics felt rushed.', star: 3 },
@@ -700,19 +634,8 @@ export const books: Book[] = [
     title: 'Understanding Cloud Computing',
     author: 'Sophie Clark',
     cost: 440,
-    sold: 399,
     releasedDate: new Date('2020-09-22'),
     reviews: [
-      {
-        name: 'Lucas Harris',
-        text: 'Excellent overview of cloud services.',
-        star: 5,
-      },
-      {
-        name: 'Emma Young',
-        text: 'Very informative and beginner-friendly.',
-        star: 4,
-      },
       {
         name: 'Benjamin Walker',
         text: 'Good, but lacking in-depth examples.',

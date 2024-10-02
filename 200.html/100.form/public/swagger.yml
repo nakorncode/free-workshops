@@ -158,10 +158,6 @@ components:
           type: string
         cost:
           type: number
-        availability:
-          type: boolean
-        totalSold:
-          type: integer
         reviews:
           type: array
           items:
