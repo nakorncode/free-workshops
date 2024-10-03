@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review</title>
+</head>
+
+<body>
+  <form action="http://localhost:4321/books/review/1" method="post" enctype="multipart/form-data">
+    <div>
+      <label>
+        ชื่อ
+        <input type="text" name="name" required>
+      </label>
+    </div>
+    <div>
+      <label>
+        ข้อความ
+        <textarea name="text" required></textarea>
+      </label>
+    </div>
+    <div>
+      <label>
+        อัปโหลดรูป
+        <input type="file" name="image" accept=".jpg,.jpeg,.png">
+      </label>
+    </div>
+    <div>
+      จำนวนดาว
+      <label>
+        <input type="radio" name="star" value="1">
+        1
+      </label>
+      <label>
+        <input type="radio" name="star" value="2">
+        2
+      </label>
+      <label>
+        <input type="radio" name="star" value="3">
+        3
+      </label>
+      <label>
+        <input type="radio" name="star" value="4">
+        4
+      </label>
+      <label>
+        <input type="radio" name="star" value="5" checked>
+        5
+      </label>
+    </div>
+    <button>ส่งรีวิว</button>
+  </form>
+</body>
+
+</html>

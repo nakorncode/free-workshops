@@ -41,6 +41,7 @@ if (!book) {
             book.reviews.map((review) => (
               <li>
                 <b>{review.name}:</b> ({review.star} ดาว) {review.text}
+                {review.image && <img src={review.image} alt={review.name} />}
               </li>
             ))
           }

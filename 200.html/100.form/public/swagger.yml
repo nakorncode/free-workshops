@@ -66,7 +66,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               type: object
               properties:
@@ -98,6 +98,9 @@ paths:
                 - lastName
                 - email
                 - password
+                - gender
+                - dateOfBirth
+                - country
       responses:
         '200':
           description: User account created successfully
@@ -107,10 +110,17 @@ paths:
                 type: string
                 example: <html> <!-- data --> </html>
 
-  /books/review:
+  /books/review/{id}:
     post:
       summary: Add a review for a book
       description: Submit a review for a book including rating and optional image.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the book to review.
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -127,7 +137,7 @@ paths:
                 image:
                   type: string
                   format: binary
-                  description: Image to upload (optional).
+                  description: Image to upload (optional; png/jpg/jpeg only).
                 star:
                   type: integer
                   description: Star rating from 1 to 5.
@@ -138,10 +148,13 @@ paths:
                 - text
                 - star
       responses:
-        '201':
-          description: Review added successfully
-        '400':
-          description: Invalid input data
+        '200':
+          description: User account created successfully
+          content:
+            text/html:
+              schema:
+                type: string
+                example: <html> <!-- data --> </html>
 
 components:
   schemas:
@@ -163,10 +176,6 @@ components:
         releaseDate:
           type: string
           format: date
-        tags:
-          type: array
-          items:
-            type: string
     Review:
       type: object
       properties:
@@ -177,4 +186,6 @@ components:
           minimum: 1
           maximum: 5
         text:
+          type: string
+        image:
           type: string

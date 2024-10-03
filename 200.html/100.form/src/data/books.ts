@@ -7,6 +7,7 @@ export interface Book {
     name: string
     text: string
     star: number
+    image?: string
   }[]
   releasedDate: Date
 }
