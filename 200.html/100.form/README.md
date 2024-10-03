@@ -1,47 +1,18 @@
-# Astro Starter Kit: Minimal
+# โปรแกรมจำลองหลังบ้าน
 
-```sh
-npm create astro@latest -- --template minimal
-```
+ใช้สำหรับทดสอบการเรียนรู้แบบฟอร์ม HTML Element `<form>` ต่างๆ เพื่อเพิ่มความเข้าใจวิธีการสื่อสารระหว่าง Frontend และ Backend ผ่านแบบฟอร์มเบื้องต้น โดยไม่ต้องใช้ JavaScript
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+สำหรับบทนี้จะแนะนำให้ศึกษาต่อที่: https://nakorncode.com/courses/html/form/
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## ขั้นตอนการติดตั้งและใช้งาน
 
-## 🚀 Project Structure
+- ติดตั้ง [Node.js](https://nodejs.org/en)
+- ใช้คำสั่ง `cd` มายัง Path นี้ (หากไม่เข้าใจวิธีการ แนะนำให้ดูจากวิดีโอ)
+- `npm install`
+- `npm run dev`
+- จากนั้นสามารถใช้ http://localhost:4321/ สำหรับ URL ทดสอบการส่งแบบฟอร์ม
+- แนะนำให้ศึกษา API จาก Swagger บน http://localhost:4321/swagger
 
-Inside of your Astro project, you'll see the following folders and files:
+## ตัวอย่างของแบบฟอร์ม HTML
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+สำหรับตัวอย่างที่ใช้งานได้ และตามที่เรียนกับคอร์สนี้ สามารถดูที่โฟลเดอร์ `html/` ของโปรเจคนี้ จะประกอบไปด้วยไฟล์สำหรับค้นหารายชื่อหนังสือ สมัครสมาชิก และส่งรีวิวพร้อมอัปโหลดรูปภาพ
