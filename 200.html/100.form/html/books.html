@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Books</title>
+</head>
+
+<body>
+  <form action="http://localhost:4321/books">
+    <div>
+      <label>
+        ชื่อหนังสือ
+        <input type="text" name="title">
+      </label>
+    </div>
+
+    <div>
+      <label>
+        ชื่อผู้เขียน
+        <input type="text" name="author">
+      </label>
+    </div>
+
+    <div>
+      <label>
+        ราคาขั้นต่ำ
+        <input type="number" name="costMin">
+      </label>
+      <label>
+        ราคาขั้นสูง
+        <input type="number" name="costMax">
+      </label>
+    </div>
+
+    <div>
+      <label>
+        จัดเรียงตาม
+        <select name="sortBy">
+          <option value=""><i>ไม่จัดเรียง</i></option>
+          <option value="asc_title">ชื่อหนังสือ (จากน้อยไปมาก)</option>
+          <option value="desc_title">ชื่อหนังสือ (จากมากไปน้อย)</option>
+          <option value="asc_author">ชื่อผู้เขียน (จากน้อยไปมาก)</option>
+          <option value="desc_author">ชื่อผู้เขียน (จากมากไปน้อย)</option>
+          <option value="asc_cost">ราคา (จากน้อยไปมาก)</option>
+          <option value="desc_cost">ราคา (จากมากไปน้อย)</option>
+          <option value="asc_totalStar">คะแนนรีวิว (จากน้อยไปมาก)</option>
+          <option value="desc_totalStar">คะแนนรีวิว (จากมากไปน้อย)</option>
+          <option value="asc_totalReview">จำนวนผู้รีวิว (จากน้อยไปมาก)</option>
+          <option value="desc_totalReview">จำนวนผู้รีวิว (จากมากไปน้อย)</option>
+          <option value="asc_releasedDate">วันที่วางขาย (จากน้อยไปมาก)</option>
+          <option value="desc_releasedDate">วันที่วางขาย (จากมากไปน้อย)</option>
+        </select>
+      </label>
+    </div>
+
+    <button>ค้นหา</button>
+  </form>
+</body>
+
+</html>

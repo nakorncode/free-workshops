@@ -1,0 +1,49 @@
+---
+import { users } from '../data/users'
+import DefaultLayout from '../layouts/DefaultLayout.astro'
+import dayjs from 'dayjs'
+import { Icon } from 'astro-icon/components'
+
+function showGender(gender: 'male' | 'female' | 'none') {
+  if (gender === 'male') {
+    return 'ชาย'
+  } else if (gender === 'female') {
+    return 'หญิง'
+  } else {
+    return 'ไม่ระบุ'
+  }
+}
+---
+
+<DefaultLayout>
+  <div class="prose max-w-none">
+    <table class="w-full text-lg">
+      <thead>
+        <tr>
+          <th>ชื่อต้น</th>
+          <th>นามสกุล</th>
+          <th>อีเมล</th>
+          <th>เพศ</th>
+          <th>วันเกิด</th>
+          <th>ประเทศ</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          users.map((user) => (
+            <tr>
+              <td>{user.firstName}</td>
+              <td>{user.lastName}</td>
+              <td>{user.email}</td>
+              <td>{showGender(user.gender)}</td>
+              <td>{dayjs(user.dateOfBirth).format('YYYY-MM-DD')}</td>
+              <td>
+                <Icon name={`flagpack:${user.country}`} />
+              </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+</DefaultLayout>

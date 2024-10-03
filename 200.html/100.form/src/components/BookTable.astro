@@ -16,6 +16,7 @@ const { books } = Astro.props
         <th>รหัส</th>
         <th>ชื่อ</th>
         <th>ผู้เขียน</th>
+        <th>ราคา</th>
         <th>วางจำหน่าย</th>
         <th>คะแนนรีวิว</th>
         <th>จำนวนรีวิว</th>
@@ -32,6 +33,7 @@ const { books } = Astro.props
               </a>
             </td>
             <td>{book.author}</td>
+            <td>{book.cost}</td>
             <td>{dayjs(book.releasedDate).format('YYYY-MM-DD')}</td>
             <td>
               {(

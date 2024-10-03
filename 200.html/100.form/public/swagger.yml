@@ -8,20 +8,7 @@ paths:
   /books:
     get:
       summary: Get all books
-      description: Retrieve a list of all books.
-      responses:
-        '200':
-          description: List of books
-          content:
-            text/html:
-              schema:
-                type: string
-                example: <html> <!-- data --> </html>
-
-  /books/search:
-    get:
-      summary: Search for books
-      description: Search for books with various filters and sorting options.
+      description: Can be search for books with various filters and sorting options.
       parameters:
         - name: title
           in: query
@@ -45,16 +32,24 @@ paths:
             type: number
         - name: sortBy
           in: query
-          description: 'Sort by one of the following: title, totalStar, sold, releaseDate.'
+          description: 'Sort by one of the following: asc_title, desc_title, asc_author, desc_author, asc_cost, desc_cost, asc_totalStar, desc_totalStar, asc_totalReview, desc_totalReview, asc_releasedDate, desc_releasedDate.'
           schema:
             type: string
-            enum: [title, totalStar, sold, releaseDate]
-        - name: order
-          in: query
-          description: Sorting order, either ascending or descending.
-          schema:
-            type: string
-            enum: [asc, desc]
+            enum:
+              [
+                asc_title,
+                desc_title,
+                asc_author,
+                desc_author,
+                asc_cost,
+                desc_cost,
+                asc_totalStar,
+                desc_totalStar,
+                asc_totalReview,
+                desc_totalReview,
+                asc_releasedDate,
+                desc_releasedDate,
+              ]
       responses:
         '200':
           description: List of books based on search filters
@@ -104,10 +99,13 @@ paths:
                 - email
                 - password
       responses:
-        '201':
+        '200':
           description: User account created successfully
-        '400':
-          description: Invalid input data
+          content:
+            text/html:
+              schema:
+                type: string
+                example: <html> <!-- data --> </html>
 
   /books/review:
     post:
