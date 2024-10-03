@@ -1,0 +1,15 @@
+---
+export const prerender = true
+import 'swagger-ui/dist/swagger-ui.css'
+---
+
+<div id="swagger-ui"></div>
+
+<script>
+  import SwaggerUI from 'swagger-ui'
+  SwaggerUI({
+    url: '/swagger.yml',
+    dom_id: '#swagger-ui',
+    supportedSubmitMethods: [],
+  })
+</script>

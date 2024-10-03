@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign-up</title>
+</head>
+
+<body>
+  <form action="http://localhost:4321/sign-up" method="POST">
+    <div>
+      <label>
+        ชื่อจริง
+        <input type="text" name="firstName" required>
+      </label>
+    </div>
+    <div>
+      <label>
+        นามสกุล
+        <input type="text" name="lastName" required>
+      </label>
+    </div>
+    <div>
+      <label>
+        อีเมล
+        <input type="email" name="email" required>
+      </label>
+    </div>
+    <div>
+      <label>
+        รหัสผ่าน
+        <input type="password" name="password" required>
+      </label>
+    </div>
+    <div>
+      เพศ:
+      <label>
+        <input type="radio" name="gender" value="male">
+        ชาย
+      </label>
+      <label>
+        <input type="radio" name="gender" value="female">
+        หญิง
+      </label>
+      <label>
+        <input type="radio" name="gender" value="none" checked>
+        ไม่ระบุ
+      </label>
+    </div>
+    <div>
+      <label>
+        วันเกิด
+        <input type="date" name="dateOfBirth" required>
+      </label>
+    </div>
+    <div>
+      <label>
+        ประเทศ
+        <select name="country">
+          <option value="ae">(AE) สหรัฐอาหรับเอมิเรตส์</option>
+          <option value="au">(AU) ออสเตรเลีย</option>
+          <option value="br">(BR) บราซิล</option>
+          <option value="ca">(CA) แคนาดา</option>
+          <option value="cn">(CN) จีน</option>
+          <option value="de">(DE) เยอรมนี</option>
+          <option value="es">(ES) สเปน</option>
+          <option value="fr">(FR) ฝรั่งเศส</option>
+          <option value="gb">(GB) สหราชอาณาจักร</option>
+          <option value="in">(IN) อินเดีย</option>
+          <option value="it">(IT) อิตาลี</option>
+          <option value="jp">(JP) ญี่ปุ่น</option>
+          <option value="kr">(KR) เกาหลีใต้</option>
+          <option value="mx">(MX) เม็กซิโก</option>
+          <option value="ru">(RU) รัสเซีย</option>
+          <option value="th">(TH) ไทย</option>
+          <option value="us">(US) สหรัฐอเมริกา</option>
+          <option value="za">(ZA) แอฟริกาใต้</option>
+        </select>
+      </label>
+    </div>
+    <div>
+      <label>
+        <input type="checkbox" required>
+        ยอมรับเงื่อนไขการบริการ
+      </label>
+    </div>
+    <button>สมัครสมาชิก</button>
+  </form>
+</body>
+
+</html>

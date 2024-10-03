@@ -1,0 +1,107 @@
+---
+import { z } from 'astro/zod'
+import BookTable from '../components/BookTable.astro'
+import { books } from '../data/books'
+import DefaultLayout from '../layouts/DefaultLayout.astro'
+import { clone, orderBy, sumBy } from 'lodash-es'
+
+const querySchema = z
+  .object({
+    title: z.string().optional(),
+    author: z.string().optional(),
+    costMin: z.string().optional(),
+    costMax: z.string().optional(),
+    sortBy: z
+      .enum([
+        '',
+        'asc_title',
+        'desc_title',
+        'asc_author',
+        'desc_author',
+        'asc_cost',
+        'desc_cost',
+        'asc_totalStar',
+        'desc_totalStar',
+        'asc_totalReview',
+        'desc_totalReview',
+        'asc_releasedDate',
+        'desc_releasedDate',
+      ])
+      .optional(),
+  })
+  .superRefine((data, ctx) => {
+    if ((data.costMin && !data.costMax) || (!data.costMin && data.costMax)) {
+      ctx.addIssue({
+        path: data.costMin ? ['costMin'] : ['costMax'],
+        message: 'ต้องมีทั้งข้อมูล costMin และ costMax',
+        code: z.ZodIssueCode.custom,
+      })
+    }
+  })
+
+const url = new URL(Astro.request.url)
+const query = querySchema.parse(Object.fromEntries(url.searchParams.entries()))
+
+let resultBooks = clone(books)
+
+if (query.title) {
+  resultBooks = resultBooks.filter((book) => {
+    return book.title.toLowerCase().includes(query.title!.toLowerCase())
+  })
+}
+if (query.author) {
+  resultBooks = resultBooks.filter((book) => {
+    return book.author.toLowerCase().includes(query.author!.toLowerCase())
+  })
+}
+if (query.costMin && query.costMax) {
+  const costMin = parseFloat(query.costMin)
+  const costMax = parseFloat(query.costMax)
+  resultBooks = resultBooks.filter((book) => {
+    return book.cost >= costMin && book.cost <= costMax
+  })
+}
+if (query.sortBy) {
+  const { sortBy: querySortBy } = query
+  if (
+    querySortBy === 'asc_title' ||
+    querySortBy === 'desc_title' ||
+    querySortBy === 'asc_author' ||
+    querySortBy === 'desc_author' ||
+    querySortBy === 'asc_cost' ||
+    querySortBy === 'desc_cost' ||
+    querySortBy === 'asc_releasedDate' ||
+    querySortBy === 'desc_releasedDate'
+  ) {
+    const splited = querySortBy.split('_')
+    const order = splited[0] as 'asc' | 'desc'
+    const key = splited[1] as 'title' | 'author' | 'cost' | 'releasedDate'
+    resultBooks = orderBy(resultBooks, (book) => book[key], order)
+  } else if (
+    querySortBy === 'asc_totalReview' ||
+    querySortBy === 'desc_totalReview'
+  ) {
+    resultBooks = orderBy(
+      resultBooks,
+      (book) => book.reviews.length,
+      querySortBy.includes('asc') ? 'asc' : 'desc'
+    )
+  } else if (
+    querySortBy === 'asc_totalStar' ||
+    querySortBy === 'desc_totalStar'
+  ) {
+    resultBooks = orderBy(
+      resultBooks,
+      (book) => {
+        const totalStar = sumBy(book.reviews, 'star')
+        return book.reviews.length > 0 ? totalStar / book.reviews.length : 0
+      },
+      querySortBy.includes('asc') ? 'asc' : 'desc'
+    )
+  }
+}
+---
+
+<DefaultLayout>
+  <BookTable books={resultBooks} />
+</DefaultLayout>
