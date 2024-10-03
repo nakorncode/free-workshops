@@ -1,16 +1,20 @@
 ---
-import DefaultLayout from "../layouts/DefaultLayout.astro"
+import DefaultLayout from '../layouts/DefaultLayout.astro'
 ---
 
 <DefaultLayout>
-  <h1 class="font-bold text-2xl">รายการ API สำหรับฝึกใช้งาน HTML Form Submission</h1>
+  <h1 class="font-bold text-2xl">
+    รายการ API สำหรับฝึกใช้งาน HTML Form Submission
+  </h1>
   <ul class="list-disc pl-6 text-lg mt-4">
     <li><a href="/swagger">Swagger UI</a></li>
+    <li><a href="/books">รายการหนังสือทั้งหมด (/books)</a></li>
+    <li><a href="/users">รายการผู้ใช้งานทั้งหมด (/users)</a></li>
   </ul>
 </DefaultLayout>
 
 <style>
-a {
-  @apply underline text-blue-600;
-}
+  a {
+    @apply underline text-blue-600;
+  }
 </style>

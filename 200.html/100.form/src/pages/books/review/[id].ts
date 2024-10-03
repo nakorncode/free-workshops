@@ -33,8 +33,10 @@ export const POST = withErrorHandling((async ({
   if (data.image && data.image.size > 0) {
     const { image } = data
     const fileName = `${v4()}${path.extname(data.image.name)}`
-    imagePath = 'uploads/' + fileName
-    const writeStream = fs.createWriteStream('public/' + imagePath)
+    imagePath = `/uploads/${fileName}`
+    const writeStream = fs.createWriteStream(
+      (import.meta.env.PROD ? 'dist/client' : 'public') + imagePath
+    )
     const buffer = Buffer.from(await image.arrayBuffer())
     writeStream.on('close', () => {
       return
@@ -45,6 +47,7 @@ export const POST = withErrorHandling((async ({
         resolve(true)
       })
       writeStream.on('error', (error) => {
+        console.error('On upload file:', error)
         reject(new Response('Error uploading file', { status: 500 }))
       })
       writeStream.end()
@@ -52,7 +55,7 @@ export const POST = withErrorHandling((async ({
   }
   book.reviews.push({
     ...data,
-    image: '/' + imagePath,
+    image: imagePath,
   })
   return redirect('/books')
 }) as APIRoute)
